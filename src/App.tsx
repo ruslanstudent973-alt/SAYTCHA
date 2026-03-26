@@ -271,9 +271,9 @@ export default function App() {
     setDescription(preset.description);
   };
 
-  const filteredOrders = orders.filter(order => 
-    order.productId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    order.userName.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredOrders = (orders || []).filter(order => 
+    (order.productId?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
+    (order.userName?.toLowerCase() || '').includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -563,13 +563,13 @@ export default function App() {
             </button>
 
             {/* Scheduled Posts List */}
-            {scheduled.length > 0 && (
+            {(scheduled || []).length > 0 && (
               <div className="space-y-3 pt-4 border-t border-zinc-800/30">
                 <label className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500 ml-1">
-                  <Clock size={12} /> Rejalashtirilgan Postlar ({scheduled.length})
+                  <Clock size={12} /> Rejalashtirilgan Postlar ({(scheduled || []).length})
                 </label>
                 <div className="space-y-2">
-                  {scheduled.map((p, idx) => (
+                  {(scheduled || []).map((p, idx) => (
                     <div key={idx} className="bg-zinc-950/50 border border-zinc-800/50 p-3 rounded-xl flex justify-between items-center">
                       <div className="space-y-0.5">
                         <div className="text-[11px] font-bold text-white">{p.productId} - {p.title || 'Nomsiz'}</div>
@@ -667,8 +667,8 @@ export default function App() {
               />
             </div>
 
-            {customers.filter(c => 
-              c.name.toLowerCase().includes(customerSearchQuery.toLowerCase()) || 
+            {(customers || []).filter(c => 
+              (c.name?.toLowerCase() || '').includes(customerSearchQuery.toLowerCase()) || 
               (c.username && c.username.toLowerCase().includes(customerSearchQuery.toLowerCase()))
             ).length === 0 ? (
               <div className="text-center py-20 text-zinc-600">
@@ -676,8 +676,8 @@ export default function App() {
                 Hozircha mijozlar yo'q.
               </div>
             ) : (
-              customers.filter(c => 
-                c.name.toLowerCase().includes(customerSearchQuery.toLowerCase()) || 
+              (customers || []).filter(c => 
+                (c.name?.toLowerCase() || '').includes(customerSearchQuery.toLowerCase()) || 
                 (c.username && c.username.toLowerCase().includes(customerSearchQuery.toLowerCase()))
               ).map((customer, idx) => (
                 <div key={idx} className="bg-zinc-900/40 border border-zinc-800/50 p-4 rounded-2xl space-y-3 shadow-lg">
@@ -783,7 +783,7 @@ export default function App() {
                 <TrendingUp size={16} className="text-amber-500" /> Top Mahsulotlar
               </div>
               <div className="space-y-4">
-                {stats.topProducts.map((p: any, idx: number) => (
+                {(stats.topProducts || []).map((p: any, idx: number) => (
                   <div key={idx} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-400">
