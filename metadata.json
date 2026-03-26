@@ -1,0 +1,5 @@
+{
+  "name": "Telegram Post Generator",
+  "description": "A Telegram Bot and Web App for generating and pinning posts in groups.",
+  "requestFramePermissions": []
+}
